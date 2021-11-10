@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             // Move the object
+            
             transform.Translate(new Vector3(0, movementY, 0));
         }
     }

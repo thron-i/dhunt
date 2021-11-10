@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 80f;
     public float jumpSpeed = 7;
-    public AudioSource coinAudioSource;
+    //public AudioSource coinAudioSource;
     Rigidbody rb;
     bool jumpPressed = false;
     Collider coll;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "coin")
         {
             print("Grabbing coin..");
-            coinAudioSource.Play();
+           // coinAudioSource.Play();
             GameManager.instance.IncreaseScore(1);
             // Destroy coin
             Destroy(collider.gameObject);
