@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 80f;
+    public float walkSpeed = 3f;
     public float jumpSpeed = 7;
     //public AudioSource coinAudioSource;
     Rigidbody rb;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 newPos = currPos + movement;
 
-        rb.MovePosition(newPos);
+        transform.position = newPos;
     }
     void JumpHandler()
     {
@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerEnter(Collider collider)
     {
+        print("bababooey");
         // Check if we ran into a coin
         if (collider.gameObject.tag == "coin")
         {
@@ -85,6 +86,27 @@ public class PlayerController : MonoBehaviour
             // Soon.. go to the game over scene
         }
     }
+
+    //private void OnTriggerStay(Collider coll)
+    //{
+    //    GameObject target = coll.gameObject;
+    //    if (target.tag == "platform")
+    //    {
+    //        Vector3 offset = target.transform.position - transform.position;
+    //        transform.parent = coll.transform;
+    //        target.transform.position = transform.position + offset;
+    //    }
+
+    //}
+
+    //private void OnTriggerExit(Collider collider)
+    //{
+    //    if (collider.gameObject.tag == "platform")
+    //    {
+    //        transform.parent = null;
+    //    }
+    //}
+
     bool CheckGrounded()
     {
         float sizeX = coll.bounds.size.x;

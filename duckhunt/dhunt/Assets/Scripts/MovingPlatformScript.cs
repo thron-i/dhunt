@@ -23,9 +23,9 @@ public class MovingPlatformScript : MonoBehaviour
         {
             string nodeName = "node" + i;
             GameObject node = GameObject.Find(nodeName);
-            print("trying to find " + nodeName + ", got " + node);
+            //print("trying to find " + nodeName + ", got " + node);
             Vector3 thisNodePos = node.transform.position;
-            print("positions are x:" + thisNodePos.x + ", y:" + thisNodePos.y + ", z:" + thisNodePos.z);
+            //print("positions are x:" + thisNodePos.x + ", y:" + thisNodePos.y + ", z:" + thisNodePos.z);
             nodePositions.Add(thisNodePos);
         }
 
@@ -77,9 +77,9 @@ public class MovingPlatformScript : MonoBehaviour
         {
             // Move the object
             Vector3 newPos = Vector3.MoveTowards(curPos, goalPos, maxMovement);
-            print("attempting to move to jump\n x:" + newPos.x + " y:" + newPos.y + " z:" + newPos.z);
+           //print("attempting to move to jump\n x:" + newPos.x + " y:" + newPos.y + " z:" + newPos.z);
             transform.position = newPos;
-            print("attempting to move to node\n x:" + goalPos.x + " y:" + goalPos.y + " z:" + goalPos.z);
+            //print("attempting to move to node\n x:" + goalPos.x + " y:" + goalPos.y + " z:" + goalPos.z);
   
         }
     }
