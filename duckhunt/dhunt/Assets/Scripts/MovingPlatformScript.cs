@@ -12,7 +12,9 @@ public class MovingPlatformScript : MonoBehaviour
     private Vector3 goalPos;
     private Vector3 curPos;
     private bool reverse = false;
-    public float speed = 0.05f;
+    public float speed = 5f;
+    private bool impulsed = false;
+    Vector3 STATIONARY = new Vector3(0, 0, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -32,16 +34,18 @@ public class MovingPlatformScript : MonoBehaviour
         goalPos = nodePositions[goalNode];
     }
 
-    // Update is called once per frame
-    void Update()
+   
+    void FixedUpdate()
     {
         curPos = transform.position;
         // How much we are moving
         float maxMovement = speed * Time.deltaTime;
-
         // Check if we're close enough to that node
-        if (Vector3.Distance(curPos, goalPos) < 0.001f)
+        //print("the distance between the positions is " + Vector3.Distance(curPos, goalPos));
+        if (transform.position == goalPos)
         {
+            print("yes");
+            impulsed = false;
             if (reverse)
             {
                 // Move to the next node
@@ -72,15 +76,25 @@ public class MovingPlatformScript : MonoBehaviour
                 goalPos = nodePositions[goalNode];
             }
         }
+
         // If it can move further, move
-        else
+
+        // Move the object
+        StartCoroutine(Vector3LerpCoroutine(gameObject, goalPos, speed));
+       
+
+        
+    }
+    IEnumerator Vector3LerpCoroutine(GameObject obj, Vector3 target, float speed)
+    {
+        Vector3 startPosition = obj.transform.position;
+        float time = 0f;
+
+        while (obj.transform.position != target)
         {
-            // Move the object
-            Vector3 newPos = Vector3.MoveTowards(curPos, goalPos, maxMovement);
-           //print("attempting to move to jump\n x:" + newPos.x + " y:" + newPos.y + " z:" + newPos.z);
-            transform.position = newPos;
-            //print("attempting to move to node\n x:" + goalPos.x + " y:" + goalPos.y + " z:" + goalPos.z);
-  
+            obj.transform.position = Vector3.Lerp(startPosition, target, (time / Vector3.Distance(startPosition, target)) * speed);
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 }

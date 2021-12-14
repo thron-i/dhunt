@@ -9,13 +9,22 @@ public class StickToThingsScript : MonoBehaviour
     void Start()
     {
     }
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        col.transform.SetParent(transform);
+        if (col.gameObject.tag == "Player")
+        {
+            print("hello");
+            col.transform.SetParent(gameObject.transform,true);
+        }
+        
     }
-    void OnTriggerExit(Collider col)
+    void OnCollisionExit(Collision col)
     {
-        col.transform.SetParent(null);
+        if (col.gameObject.tag == "Player")
+        {
+            col.transform.SetParent(null);
+            print("goodbye");
+        }
     }
 
         // Start is called before the first frame update
